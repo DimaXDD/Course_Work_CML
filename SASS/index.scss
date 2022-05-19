@@ -1,0 +1,1042 @@
+//Импорт шрифтов
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&family=Poppins&display=swap");
+
+// Объявление переменных
+$active-link: #ac1313;
+$black: #000000;
+$text: #6c6c6c;
+$pink: #d77474;
+$white: #ffffff;
+
+// Миксины
+@mixin my-opacity {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+
+html,
+body,
+main {
+  scroll-behavior: smooth; // для плавного перехода по якорным ссылкам
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 6px;
+}
+
+// Стили для страницы в целом
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+// Header
+.header {
+  // Стили для блока header
+  max-width: 1440px;
+  padding: 0 150px 0 130px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  background: $white;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  // Логотип
+  .logo {
+    width: 119px;
+    height: 45px;
+    margin: 19px 0 0 0;
+  }
+  // Блок Меню
+  .header__links {
+    box-sizing: border-box;
+    padding: 26px 0;
+    display: flex;
+    justify-content: space-between;
+    // Само меню
+    .containers {
+      display: none;
+      cursor: pointer;
+    }
+    .bar1,
+    .bar2,
+    .bar3 {
+      width: 35px;
+      height: 5px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+    .change .bar1 {
+      -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+      transform: rotate(-45deg) translate(-9px, 6px);
+    }
+    .change .bar2 {
+      opacity: 0;
+    }
+    .change .bar3 {
+      -webkit-transform: rotate(45deg) translate(-8px, -8px);
+      transform: rotate(45deg) translate(-8px, -8px);
+    }
+    .header__menu {
+      max-width: 335px;
+      display: flex;
+      min-height: 38px;
+      border-right: 1px solid #ebebeb;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 10px;
+      margin: 0;
+      a {
+        display: inline-block;
+        line-height: 1;
+        text-decoration: none; /* Убираем подчеркивание */
+        cursor: pointer;
+      }
+      a:after {
+        background-color: red; /* Цвет линии при наведении на нее курсора мыши */
+        display: block;
+        content: "";
+        height: 2px; /* Высота линии */
+        width: 0%;
+        -webkit-transition: width .3s ease-in-out;
+        -moz--transition: width .3s ease-in-out;
+        transition: width .3s ease-in-out;
+      }
+      a:hover:after,
+      a:focus:after {
+        width: 100%;
+      }
+      // Якорные ссылки
+      .header__link {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 22px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $text;
+        margin-right: 40px;
+        cursor: pointer;
+      }
+      .header__link:hover {
+        color: $active-link;
+      }
+    }
+    // Корзина
+    .header__cart {
+      align-self: center;
+      text-decoration: none;
+      margin: 0 0 0 41px;
+      // Корзина
+      .header__cart-text {
+        font-family: "Libre Franklin";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: $black;
+        align-items: center;
+        margin: 0;
+        position: relative;
+      }
+    }
+  }
+}
+
+// Слайдер
+.main_slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  .close_btn {
+    position: absolute;
+    cursor: pointer;
+    font-size: 40px;
+    color: white;
+    top: 20px;
+    right: 20px;
+  }
+  &.active {
+    display: flex;
+  }
+  .container {
+    margin: 0 auto;
+    width: 1000px;
+    max-width: calc(100% - 30px);
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+  }
+  .slides {
+    display: flex;
+    height: 100%;
+  }
+  .slide {
+    min-width: 100%;
+    position: relative;
+  }
+  .slide img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .slide-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #next-btn,
+  #prev-btn {
+    cursor: pointer;
+    background: transparent;
+    font-size: 30px;
+    border: none;
+    padding: 10px;
+    color: white;
+  }
+  #next-btn:focus,
+  #prev-btn:focus {
+    outline: none;
+  }
+  .slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: darkred;
+  }
+}
+
+// Скролл
+.scroll {
+  border-radius: 50%;
+  background: #4d5057;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  display: none;
+  z-index: 4;
+  transition: 0.4s;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  &:hover {
+    background-color: black;
+  }
+  .scroll_up {
+    transform: rotate(270deg) translate(35px, 0px);
+    width: 100%;
+    height: 100%;
+    transition: 0.6s;
+  }
+}
+
+// Корзина при наведении
+.header__cart-icon:hover {
+  @include my-opacity;
+}
+
+// Добавление SVG корзины
+.header__cart-text:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url(../image/Group.svg);
+  top: 0;
+  left: -25px;
+}
+
+// Корзина при наведении
+.header__cart-text:hover {
+  @include my-opacity;
+}
+
+// Секция PROMO
+.promo {
+  max-width: 1440px;
+  background-image: url("../image/promo-background.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 93px 32px 118px 151px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.promo__container {
+  max-width: 1252px;
+  min-height: 500px;
+  display: flex;
+  margin: 0;
+  position: relative;
+}
+
+.promo__text {
+  z-index: 2;
+  max-width: 512px;
+  margin-top: 40px;
+}
+
+.promo__author {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $pink;
+  margin-top: 60px;
+}
+
+.promo__title {
+  width: 422px;
+  height: 116px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  position: relative;
+  margin: 0;
+}
+
+.promo__title::after {
+  content: "";
+  position: absolute;
+  background-image: url(../image/&.svg);
+  width: 57px;
+  height: 68px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: -15px;
+  right: -60px;
+}
+
+.promo__slogan {
+  max-width: 512px;
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: $text;
+  margin: 14px 0 49px 0;
+}
+
+.promo__image {
+  z-index: 1;
+  width: 784px;
+  height: 445px;
+  object-fit: cover;
+  position: absolute;
+  top: 35px;
+  right: -5px;
+}
+
+.promo__button {
+  width: 201px;
+  height: 62px;
+  background: $active-link;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $white;
+  border: none;
+  padding: 0;
+  transition: 0.2s linear; /* Время изменения */
+}
+
+.promo__button:hover {
+  background: $black;
+  cursor: pointer;
+}
+
+// Секция Product Categories
+.categories {
+  padding: 119px;
+  position: relative;
+}
+
+.section-subtitle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $pink;
+  margin: 0;
+  margin-left: 15px;
+}
+
+.section-title-block {
+  margin: 7px 0 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.section-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  color: $black;
+}
+
+.section-title-image {
+  display: block;
+  background-image: url(../image/&.svg);
+  width: 57px;
+  height: 68px;
+  background-repeat: no-repeat;
+  margin: 10px 0 0 5px;
+  background-size: contain;
+}
+
+.title-aside {
+  width: 313px;
+  height: 34px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 34px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #dbdbdb;
+  transform: rotate(-90deg);
+  margin: 0;
+  align-self: start;
+  position: absolute;
+  top: 34%;
+  left: -65px;
+}
+
+.categories__items {
+  max-width: 1022px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.categories__item {
+  box-sizing: border-box;
+  width: 240px;
+  height: 240px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $white;
+  padding-top: 118px;
+  position: relative;
+  border: 30px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100%;
+  flex-shrink: 0;
+}
+
+.categories__item:last-of-type {
+  margin: 0;
+}
+
+.categories__item:hover {
+  @include my-opacity;
+}
+
+.categories__item_color_biege {
+  background: #e4b366;
+}
+
+.categories__item::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 45px;
+  left: 55px;
+}
+
+.categories__item_color_biege::after {
+  background-image: url(../image/vase.svg);
+}
+
+.categories__item_color_orange {
+  background: #f05b10;
+}
+
+.categories__item_color_orange::after {
+  background-image: url(../image/mugs.svg);
+}
+
+.categories__item_color_red {
+  background: #a21010;
+}
+
+.categories__item_color_red::after {
+  background-image: url(../image/plates.svg);
+}
+
+.categories__decriptoins {
+  max-width: 1172px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 133px;
+  margin: 90px auto 28px auto;
+}
+
+.categories__decriptoins-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 36px;
+  max-width: 323px;
+  margin: 0 0 25px 0;
+}
+
+.categories__decriptoins-text {
+  max-width: 501px;
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: $text;
+  margin: 0;
+}
+
+// Секция двух ваз
+.featured-products {
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  position: relative;
+  padding-right: 20px;
+}
+
+.featured-products-wrapper {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 250px);
+  gap: 195px 0;
+  padding: 220px 20px 120px 65px;
+}
+
+.featured-products__image {
+  max-width: 500px;
+  height: 220px;
+  background-color: #f5f5f5;
+  position: relative;
+}
+
+.featured-products__image::after {
+  content: "";
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 509px;
+  top: -65%;
+  left: 25%;
+}
+
+.featured-products__image_color_gold::after {
+  background-image: url(../image/image-vase2.png);
+}
+
+.featured-products__image_color_orange::after {
+  width: 350px;
+  background-image: url(../image/image-vase.png);
+  top: -45%;
+  left: 14%;
+}
+
+.featured-products__title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 34px;
+  margin: 20px 0 23px 0;
+}
+
+.featured-products__text {
+  max-width: 388px;
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: $text;
+  margin: 0 0 27px 0;
+}
+
+.featured-products__link {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: $black;
+  text-decoration: none;
+}
+
+.featured-products__link:hover {
+  text-decoration: underline;
+}
+
+.title-aside-featured-products {
+  font-size: 20px;
+  line-height: 34px;
+  position: absolute;
+  left: 84.5%;
+  top: 41%;
+}
+
+// Секция Shop
+.store {
+  width: 100%;
+  padding: 120px 0 120px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title_store {
+  margin: 16px 0 63px 18px;
+}
+
+.title-aside_store {
+  width: 340px;
+  left: -95px;
+  top: 44%;
+  position: absolute;
+}
+
+.table {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 1178px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.table__text {
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: $text;
+  margin: 17px 0 0 0;
+}
+
+.table__price {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: $black;
+  margin: 0 0 17px 0;
+}
+
+.table__cell {
+  width: 371px;
+  height: 580px;
+  list-style: none;
+  border-bottom: 1px solid #ebebeb;
+  margin-bottom: 20px;
+}
+
+.table__cell:hover {
+  cursor: pointer;
+  border-bottom: 1px solid red;
+}
+
+.table__image {
+  width: 370px;
+  height: 494px;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.table__image:hover {
+  transform: scale(1.05);
+}
+
+.selection-card {
+  text-decoration: none;
+}
+
+.button {
+  margin-top: 38px;
+  width: 214px;
+  height: 62px;
+  background: $active-link;
+  border: none;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 22px;
+  text-align: end;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $white;
+  padding: 0 40px 0 0;
+  box-sizing: border-box;
+  align-self: center;
+  transition: 0.2s linear; /* Время изменения */
+}
+
+.button:hover {
+  background: $black;
+  cursor: pointer;
+}
+
+.form-button {
+  text-align: center;
+}
+
+// Секция Новая коллекция
+.new-collection {
+  max-width: 1440px;
+  min-height: 471px;
+  background-image: url("../image/background_new-collection.jpg");
+  padding: 121px 0 0 144px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+.new-collection__subtitle {
+  max-width: 556px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $pink;
+  margin: 0;
+}
+
+.new-collection__title {
+  max-width: 556px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 46px;
+  color: $black;
+  margin: 10px 0 0 0;
+}
+
+.new-collection__text {
+  max-width: 425px;
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: $text;
+  margin: 10px 0 30px 0;
+}
+
+.new-collection__link {
+  color: $active-link;
+  text-decoration: underline;
+}
+
+.button_place_new-collection {
+  margin: 0;
+  text-align: center;
+  padding: 0;
+  width: 195px;
+}
+
+// Секция фидбека
+.subscription {
+  max-width: 1440px;
+  padding: 243px 0 134px 0;
+  position: relative;
+}
+
+.section-subtitle_subscription {
+  position: relative;
+  font-weight: 400;
+  margin-right: 11px;
+}
+
+.section-subtitle_subscription::after {
+  position: absolute;
+  content: "";
+  background-image: url(../image/message.svg);
+  background-size: contain;
+  width: 80px;
+  height: 80px;
+  top: -120px;
+  left: 47%;
+}
+
+.section-title_subscription {
+  font-weight: 400;
+}
+
+.form-subscription {
+  max-width: 505px;
+  min-height: 133px;
+  margin: 0 auto;
+}
+
+.form-subscription__field {
+  width: 320px;
+  height: 45px;
+  border: 1px solid #ebebeb;
+  box-sizing: border-box;
+  border-radius: 0px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: start;
+  color: #a1a1a1;
+  padding-left: 42px;
+  margin-right: 5px;
+}
+
+.form-subscription__button {
+  width: 175px;
+  height: 45px;
+  background: $black;
+  border: none;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: $white;
+  text-transform: uppercase;
+}
+
+.form-subscription__button:hover {
+  @include my-opacity;
+}
+
+.form-subscription__checkbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.form-subscription__checkbox-invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.form-subscription__checkbox-pseudo {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border: 1px solid $text;
+}
+
+.form-subscription__checkbox-pseudo:hover {
+  @include my-opacity;
+}
+
+.form-subscription__checkbox-text {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #a1a1a1;
+  margin: 0 0 0 10px;
+}
+
+.title-aside-subscription {
+  position: absolute;
+  left: 84.5%;
+  top: 32%;
+  font-size: 15px;
+  line-height: 34px;
+}
+
+// Содежимое футера
+.contacts {
+  max-width: 1440px;
+  padding: 90px 120px 83px 120px;
+  background: rgba(252, 252, 252, 1);
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+}
+
+.contacts-wrapper {
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.contacts__text {
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: $text;
+  margin: 20px auto 70px auto;
+}
+
+.logo_contacts {
+  margin: 19px auto 0 auto;
+}
+
+.contacts-block {
+  max-width: 1120px;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-left: 150px;
+}
+
+.contacts-block__item {
+  max-width: 188px;
+  min-height: 127px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding-top: 20px;
+}
+
+.contacts-block__item_email {
+  background-image: url(../image/email.svg);
+}
+
+.contacts-block__item_adress {
+  background-image: url(../image/adress.svg);
+}
+
+.contacts-block__item_phone {
+  background-image: url(../image/phone.svg);
+}
+
+.contacts-block__title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 30px 0 20px 0;
+}
+
+.contacts-block__info {
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: $text;
+  margin: 0;
+}
+
+.footer {
+  max-width: 1440px;
+  background-color: rgba(249, 249, 249, 1);
+  padding: 34px 0 34px 0;
+}
+
+.footer__copiright {
+  text-align: center;
+  margin: 0;
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: $text;
+}
+
+.footer__autor {
+  color: $black;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: $text;
+}
