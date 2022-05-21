@@ -1,5 +1,9 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&family=Poppins&display=swap");
+a {
+  text-decoration: none;
+}
+
 html,
 body,
 main {
