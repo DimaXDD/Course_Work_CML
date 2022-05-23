@@ -3,11 +3,9 @@ window.onload = () =>{
     input.oninput = function(){
         let value = this.value.trim();
         let list = document.querySelectorAll('.table li');
-
         if(value  != ''){
-
             list.forEach(elem =>{
-                if(elem.innerText.search(value) == -1){
+                if(elem.innerText.toLowerCase().search(value.toLowerCase()) == -1){
                     elem.classList.add('hide')
                 }
             });
