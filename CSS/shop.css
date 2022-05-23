@@ -6,6 +6,10 @@ main {
   scroll-behavior: smooth;
 }
 
+.hide {
+  display: none;
+}
+
 *::-webkit-scrollbar {
   width: 6px;
   height: 2px;
@@ -351,6 +355,35 @@ main {
   position: absolute;
 }
 
+form {
+  position: relative;
+  width: 350px;
+  margin: 20px auto;
+}
+
+.d1 input {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7BA7AB;
+  border-radius: 5px;
+  outline: none;
+  color: #9E9C9C;
+}
+
+.d1 .subm {
+  position: absolute;
+  padding-top: 5px;
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
 .table {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -543,6 +576,10 @@ main {
 .footer__link {
   text-decoration: none;
   color: #6c6c6c;
+}
+
+.elastic li.hide {
+  display: none;
 }
 
 @media (max-width: 1023px) {
